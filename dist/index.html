@@ -859,7 +859,7 @@
     :root{
       --page-gutter:clamp(18px,4vw,72px);
       --content-max:1440px;
-      --header-height:clamp(172px,13vw,198px);
+      --header-height:clamp(142px,9vw,158px);
       --tap:44px;
     }
     html{min-width:320px;overflow-x:clip;text-size-adjust:100%;-webkit-text-size-adjust:100%;scroll-padding-top:24px}
@@ -878,19 +878,28 @@
     header{
       width:100%;min-height:var(--header-height);
       position:sticky;top:0;z-index:100;
-      grid-template-columns:minmax(190px,1fr) minmax(680px,900px) minmax(190px,1fr);
-      gap:clamp(18px,2.6vw,52px);padding:20px var(--page-gutter) 24px;
+      grid-template-columns:minmax(190px,1fr) minmax(640px,760px) minmax(190px,1fr);
+      gap:clamp(22px,2.6vw,48px);padding:6px var(--page-gutter) 8px;
     }
     .brand{font-size:clamp(1.5rem,2vw,2.35rem)!important;white-space:nowrap}
     .right{white-space:nowrap}
     .right button{min-height:var(--tap);padding:10px 0 8px}
     .mobileMenu{display:none!important}
     .nav{
-      max-width:900px;grid-template-columns:repeat(3,minmax(84px,120px)) 132px repeat(3,minmax(84px,120px));
-      grid-template-rows:132px auto;justify-content:center;column-gap:0;padding:8px 22px 16px;
+      max-width:760px;grid-template-columns:repeat(3,minmax(78px,106px)) 88px repeat(3,minmax(78px,106px));
+      grid-template-rows:88px 34px;justify-content:center;column-gap:0;padding:2px 18px 4px;
     }
-    .nav a:not(.orbit){min-height:var(--tap);display:flex;align-items:flex-start;justify-content:center;padding-top:8px}
-    .nav .orbit{width:132px;height:132px;min-width:132px}
+    .nav a:not(.orbit){min-height:34px;display:flex;align-items:flex-start;justify-content:center;padding-top:3px}
+    .nav .orbit{width:88px;height:88px;min-width:88px;font-size:clamp(1.7rem,2.35vw,2.7rem)!important}
+    .nav:before,.nav:after{top:44px!important;width:145px!important;font-size:clamp(1.45rem,2.2vw,2.5rem)!important}
+    .nav:before{right:calc(50% + 52px)!important}
+    .nav:after{left:calc(50% + 52px)!important}
+    header:before,header:after{
+      top:50%!important;bottom:auto!important;width:clamp(96px,9vw,140px)!important;height:clamp(82px,7.5vw,118px)!important;
+      background-size:contain!important;background-position:center!important;transform:translateY(-50%);opacity:.18!important
+    }
+    header:before{left:calc(50% - 540px)!important}
+    header:after{right:calc(50% - 540px)!important}
     .searchPanel{position:fixed;top:calc(var(--header-height) - 18px);right:var(--page-gutter);width:min(390px,calc(100vw - 2 * var(--page-gutter)));z-index:70}
 
     /* Homepage composition. */
@@ -922,23 +931,38 @@
 
     /* Laptop: wordmark receives its own row, eliminating the collision seen around 1152–1366 px. */
     @media (max-width:1279px){
-      :root{--header-height:250px}
-      header{
-        grid-template-columns:1fr 1fr;grid-template-rows:auto auto;min-height:var(--header-height);
-        gap:10px 28px;padding-top:12px;padding-bottom:14px
-      }
-      .brand{grid-column:1;grid-row:1;align-self:center}
-      .right{grid-column:2;grid-row:1;align-self:center}
-      .nav{grid-column:1/-1;grid-row:2;width:min(900px,100%);justify-self:center;grid-template-columns:repeat(3,minmax(84px,120px)) 112px repeat(3,minmax(84px,120px));grid-template-rows:112px auto;padding-top:4px;padding-bottom:10px}
-      .nav .orbit{width:112px;height:112px;min-width:112px}
-      .nav:before,.nav:after{top:56px}
-      header:before{left:8%;width:18%}
-      header:after{right:8%;width:18%}
-      .searchPanel{top:72px}
       .hero{min-height:auto;grid-template-columns:minmax(220px,.8fr) minmax(310px,460px) minmax(220px,.8fr)}
       #productViews .productInfo{top:24px;max-height:calc(100dvh - 48px)}
       #productViews .thumbs{top:24px}
       .catalogGrid,.grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+    }
+
+    /* Compact laptop header: avoid a tall two-row masthead when browser scaling reduces CSS width. */
+    @media (min-width:900px) and (max-width:1199px){
+      :root{--header-height:76px}
+      header{
+        min-height:var(--header-height);grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto;
+        gap:18px;padding:10px var(--page-gutter);overflow:visible
+      }
+      header:before,header:after{display:none!important}
+      .brand{grid-column:1;grid-row:1;align-self:center;font-size:clamp(1.35rem,2.5vw,1.8rem)!important;padding:0 0 9px!important}
+      .right{grid-column:2;grid-row:1;align-self:center;padding:0!important;gap:10px}
+      .right button{font-family:'DM Sans',sans-serif;font-size:.76rem!important;border-bottom:0;padding:8px 6px}
+      .mobileMenu{display:inline-grid!important;place-items:center;font-size:1.2rem!important}
+      .nav,.nav.mobileOpen{
+        position:fixed;inset:var(--header-height) 0 auto 0;width:100%;max-width:none;max-height:calc(100dvh - var(--header-height));
+        overflow:auto;overscroll-behavior:contain;z-index:65;border-radius:0 0 24px 24px;
+        grid-column:auto;grid-row:auto;grid-template-columns:1fr!important;grid-template-rows:auto!important;
+        gap:0;padding:18px var(--page-gutter) calc(24px + env(safe-area-inset-bottom));
+        background:rgba(255,250,247,.98)!important;box-shadow:0 20px 45px rgba(67,43,57,.16)!important;
+        transform:translateY(-12px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease,transform .22s ease,visibility .22s
+      }
+      .nav.mobileOpen{display:grid!important;transform:none;opacity:1;visibility:visible;pointer-events:auto}
+      .nav:before,.nav:after{display:none!important}
+      .nav .orbit{display:grid;width:88px;height:88px;min-width:88px;grid-column:1!important;grid-row:1!important;justify-self:center;margin:2px 0 14px;font-size:2rem!important}
+      .nav a:not(.orbit){grid-column:1!important;grid-row:auto!important;width:100%!important;max-width:none!important;min-height:52px;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(67,43,57,.18);font-size:1.12rem!important;text-align:left}
+      .nav a:not(.orbit):after{content:'↗';font-family:'DM Sans',sans-serif;font-size:.9rem}
+      .searchPanel{top:calc(var(--header-height) + 8px)}
     }
 
     /* Tablet and narrow landscape layouts. */
@@ -1111,7 +1135,7 @@
           if(wasMenu&&menu)menu.focus();else if(wasSearch&&searchButton)searchButton.focus();
         }
       });
-      window.addEventListener('resize',function(){if(innerWidth>899)closeTransient();},{passive:true});
+      window.addEventListener('resize',function(){if(innerWidth>1199)closeTransient();},{passive:true});
 
       /* Preserve genuine browser history for every hash route. */
       if(typeof go==='function'){
