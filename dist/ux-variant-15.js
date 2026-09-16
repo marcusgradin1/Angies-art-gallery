@@ -14,31 +14,10 @@
     const stage=document.querySelector('[data-product-stage]');
     const product=document.querySelector('.product');
     if(!stage||!product)return;
-    if(!document.querySelector('.ux-view-status')){
-      const status=document.createElement('div');status.className='ux-view-status';status.innerHTML='<span>Bildvisning</span><span>Tre perspektiv · klicka för fullscreen</span>';
-      stage.after(status);
-    }
-    const labels=['Verket','I ett rum','I en annan miljö'];
-    const descriptions=['Själva verket visas rent och tydligt. Öppna bilden för att zooma och panorera fritt.','Se hur verket fungerar på väggen i vår fasta, neutrala miljö.','Se verket i en annan miljö och få en alternativ känsla för upphängningen.'];
-    const viewButtons=[...document.querySelectorAll('.product-view')];
-    viewButtons.forEach((view,index)=>{
-      const image=view.querySelector('img');
-      if(index===1)view.dataset.image='test-gallery-room.png';
-      if(index===2)view.dataset.image='test-gallery-room-rose.png';
-      if(image&&index>0){image.src=view.dataset.image;image.alt=index===1?'Verket i ett ljust galleri':'Verket i en alternativ gallerimiljö'}
-    });
-    viewButtons.forEach((view,index)=>{
-      const label=view.querySelector('span');
-      if(label&&labels[index])label.textContent=`0${index+1} / ${labels[index]}`;
-      if(labels[index])view.setAttribute('aria-label',`Visa ${labels[index].toLowerCase()}`);
-    });
-    const activeView=document.querySelector('.product-view.active');
-    const activeIndex=activeView?[...document.querySelectorAll('.product-view')].indexOf(activeView):0;
+    document.querySelector('.product-view-grid')?.remove();
+    document.querySelector('.product-gallery > .eyebrow')?.remove();
     const stageLabel=stage.querySelector('.product-stage-label');
-    if(stageLabel&&labels[activeIndex])stageLabel.textContent=`0${activeIndex+1} / ${labels[activeIndex]}`;
-    if(!document.querySelector('.ux-view-caption')){
-      const caption=document.createElement('p');caption.className='ux-view-caption';caption.textContent=descriptions[activeIndex]||descriptions[0];stage.after(caption);
-    }
+    if(stageLabel)stageLabel.textContent='01 / Verket';
     if(!document.querySelector('.ux-wishlist')){
       const id=(location.hash.match(/product-(\d+)/)||[])[1]||'01';
       const saved=JSON.parse(localStorage.getItem('angies-art-wishlist')||'[]');
@@ -65,7 +44,6 @@
     const menu=document.querySelector('#menuToggle');
     if(menu&&!menu.dataset.uxReady){menu.dataset.uxReady='true';menu.setAttribute('aria-label','Öppna alla sidor');menu.title='Öppna alla sidor';menu.addEventListener('click',()=>setTimeout(()=>menu.setAttribute('aria-expanded',document.querySelector('#nav')?.classList.contains('open')?'true':'false'),0))}
   }
-  document.addEventListener('click',e=>{const view=e.target.closest('.product-view');if(!view)return;setTimeout(()=>{const labels=['Verket','I ett rum','I en annan miljö'];const descriptions=['Själva verket visas rent och tydligt. Öppna bilden för att zooma och panorera fritt.','Se hur verket fungerar på väggen i vår fasta, neutrala miljö.','Se verket i en annan miljö och få en alternativ känsla för upphängningen.'];const label=document.querySelector('.product-stage-label');const caption=document.querySelector('.ux-view-caption');const active=[...document.querySelectorAll('.product-view')].indexOf(view);if(label&&labels[active])label.textContent=`0${active+1} / ${labels[active]}`;if(caption&&descriptions[active])caption.textContent=descriptions[active]},0)});
   function enhance(){addDiscovery();addProductTools();addToast();improveSearch();improveMenu()}
   const app=document.querySelector('#app');
   let enhancing=false,scheduled=false;
