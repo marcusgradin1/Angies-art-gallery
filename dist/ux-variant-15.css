@@ -25,6 +25,16 @@ body[data-variant="15"] .menu::before{content:'';width:1.1rem;height:1px;backgro
 body[data-variant="15"] .nav.open{position:absolute;z-index:20;top:calc(100% + .65rem);right:clamp(1rem,5vw,6rem);display:grid;grid-template-columns:repeat(2,minmax(9rem,1fr));gap:.25rem;padding:.75rem;background:var(--bg);border:1px solid var(--line);box-shadow:0 1rem 2rem #29242618}
 body[data-variant="15"] .nav.open a{padding:.8rem;color:var(--fg);background:var(--paper)}
 body[data-variant="15"] .nav.open a:hover,body[data-variant="15"] .nav.open a:focus-visible{background:var(--fg);color:var(--bg)}
+body[data-variant="15"] .ux-wishlist-page{max-width:var(--max);margin:0 auto;padding:clamp(3rem,8vw,7rem) clamp(1.2rem,5vw,6rem)}
+body[data-variant="15"] .ux-wishlist-page__intro{display:flex;justify-content:space-between;gap:2rem;align-items:end;margin-bottom:3rem}
+body[data-variant="15"] .ux-wishlist-page__intro h1{margin:.6rem 0 0;font:400 clamp(3rem,7vw,7rem)/.86 var(--serif);letter-spacing:-.09em}
+body[data-variant="15"] .ux-wishlist-page__intro p{max-width:28ch;margin:0;color:var(--muted)}
+body[data-variant="15"] .ux-wishlist-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+body[data-variant="15"] .ux-wishlist-card{position:relative;color:var(--fg);text-decoration:none}
+body[data-variant="15"] .ux-wishlist-card img{display:block;width:100%;aspect-ratio:1/1.08;object-fit:contain;padding:4%;background:#fff}
+body[data-variant="15"] .ux-wishlist-card__meta{display:flex;justify-content:space-between;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--line);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase}
+body[data-variant="15"] .ux-wishlist-card__remove{margin-top:.55rem;padding:0;border:0;background:none;color:var(--muted);font-size:.68rem;text-decoration:underline;cursor:pointer}
+body[data-variant="15"] .ux-wishlist-empty{max-width:32rem;padding:2rem 0;border-top:1px solid var(--line);color:var(--muted)}
 body[data-variant="15"] .product-lightbox{padding:clamp(1.5rem,6vw,5rem)}
 body[data-variant="15"] .product-lightbox figure{width:min(72vw,60rem);height:min(76vh,48rem);min-width:0;min-height:0;overflow:hidden}
 body[data-variant="15"] .product-lightbox img{width:auto;height:auto;min-width:0;min-height:0;max-width:100%;max-height:100%}
@@ -36,3 +46,4 @@ body[data-variant="15"] .ux-toast.is-visible{opacity:1;transform:translateY(0)}
 body[data-variant="15"] .product-stage:focus-visible,body[data-variant="15"] .work:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 @media(max-width:760px){body[data-variant="15"] .ux-discovery{display:block;margin-bottom:1rem}body[data-variant="15"] .ux-discovery__links{margin-top:1px}body[data-variant="15"] .ux-room-preview__head{display:block}body[data-variant="15"] .ux-room-preview__head p{margin-top:.4rem}body[data-variant="15"] .ux-toast{right:1rem;bottom:1rem;left:1rem;max-width:none}}
 @media(max-width:760px){body[data-variant="15"] .product-lightbox{padding:1rem}body[data-variant="15"] .product-lightbox figure{width:90vw;height:72vh}}
+@media(max-width:760px){body[data-variant="15"] .ux-wishlist-page__intro{display:block}body[data-variant="15"] .ux-wishlist-page__intro p{margin-top:1rem}body[data-variant="15"] .ux-wishlist-grid{grid-template-columns:1fr 1fr}}

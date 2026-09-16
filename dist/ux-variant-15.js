@@ -25,7 +25,7 @@
       const saved=JSON.parse(localStorage.getItem('angies-art-wishlist')||'[]');
       const button=document.createElement('button');button.type='button';button.className='ux-wishlist';button.dataset.wishlist=id;button.setAttribute('aria-pressed',saved.includes(id)?'true':'false');button.textContent=saved.includes(id)?'Sparat i önskelistan':'Spara verk i önskelistan';
       document.querySelector('.panel .buy')?.after(button);
-      button.addEventListener('click',()=>{const list=JSON.parse(localStorage.getItem('angies-art-wishlist')||'[]');const next=list.includes(id)?list.filter(item=>item!==id):[...list,id];localStorage.setItem('angies-art-wishlist',JSON.stringify(next));const active=next.includes(id);button.classList.toggle('is-saved',active);button.setAttribute('aria-pressed',active?'true':'false');button.textContent=active?'Sparat i önskelistan':'Spara verk i önskelistan'});
+      button.addEventListener('click',()=>{const list=JSON.parse(localStorage.getItem('angies-art-wishlist')||'[]');const next=list.includes(id)?list.filter(item=>item!==id):[...list,id];localStorage.setItem('angies-art-wishlist',JSON.stringify(next));const active=next.includes(id);button.classList.toggle('is-saved',active);button.setAttribute('aria-pressed',active?'true':'false');button.textContent=active?'Sparat i önskelistan':'Spara verk i önskelistan';ensureWishlistLink()});
     }
     if(!document.querySelector('.ux-room-preview')){
       const room=document.createElement('section');room.className='ux-room-preview';room.setAttribute('aria-label','Se verket i ett rum');room.innerHTML='<div class="ux-room-preview__head"><div><span class="eyebrow">Fast miljö</span><strong>Se verket på väggen.</strong></div><p>Ändra tavlans storlek, inte rummet.</p></div><div class="ux-room"><img class="ux-room__image" src="test-gallery-room.png" alt="Ljust galleri med en fri vägg"><img class="ux-room__art" src="assets/placeholders/art-01.jpg" alt="Verket placerat på väggen"></div><div class="ux-room__scale" role="group" aria-label="Välj tavlans storlek"><button type="button" data-room-scale="small">Liten</button><button type="button" data-room-scale="medium" class="is-active">Mellan</button><button type="button" data-room-scale="large">Stor</button></div>';
@@ -46,7 +46,25 @@
     const menu=document.querySelector('#menuToggle');
     if(menu&&!menu.dataset.uxReady){menu.dataset.uxReady='true';menu.setAttribute('aria-label','Öppna alla sidor');menu.title='Öppna alla sidor';menu.addEventListener('click',()=>setTimeout(()=>menu.setAttribute('aria-expanded',document.querySelector('#nav')?.classList.contains('open')?'true':'false'),0))}
   }
-  function enhance(){addDiscovery();addProductTools();addToast();improveSearch();improveMenu()}
+  function savedIds(){return JSON.parse(localStorage.getItem('angies-art-wishlist')||'[]')}
+  function ensureWishlistLink(){
+    const nav=document.querySelector('#nav');
+    if(!nav)return;
+    let link=nav.querySelector('.ux-wishlist-link');
+    if(!link){link=document.createElement('a');link.className='ux-wishlist-link';link.href='#wishlist';link.textContent='Önskelista';nav.append(link)}
+    const count=savedIds().length;link.textContent=count?`Önskelista (${count})`:'Önskelista';
+  }
+  function renderWishlist(){
+    const ids=savedIds();
+    const app=document.querySelector('#app');
+    if(!app)return;
+    const cards=ids.map(id=>`<article class="ux-wishlist-card"><a href="#product-${id}"><img src="${id==='01'?'assets/placeholders/art-01.jpg':id==='02'?'art-background.png':id==='03'?'test-gallery-room.png':id==='04'?'test-gallery-room-rose.png':'header-lineart-painter.png'}" alt="Sparat verk ${id}"><div class="ux-wishlist-card__meta"><span>Verk ${id}</span><span>Öppna ↗</span></div></a><button type="button" class="ux-wishlist-card__remove" data-wishlist-remove="${id}">Ta bort</button></article>`).join('');
+    app.innerHTML=`<main class="ux-wishlist-page"><div class="ux-wishlist-page__intro"><div><span class="eyebrow">Dina sparade verk</span><h1>Önskelista.</h1></div><p>Samla verken du vill återvända till och jämför dem i lugn och ro.</p></div>${ids.length?`<div class="ux-wishlist-grid">${cards}</div>`:'<div class="ux-wishlist-empty">Du har inte sparat något verk ännu. När du hittar ett verk du tycker om kan du spara det här.</div>'}</main>`;
+    document.querySelectorAll('[data-route]').forEach(a=>a.classList.toggle('active',a.dataset.route===location.hash.slice(1)));
+  }
+  document.addEventListener('click',e=>{const link=e.target.closest('.ux-wishlist-link');if(link){e.preventDefault();location.hash='wishlist'}const remove=e.target.closest('[data-wishlist-remove]');if(remove){const next=savedIds().filter(id=>id!==remove.dataset.wishlistRemove);localStorage.setItem('angies-art-wishlist',JSON.stringify(next));renderWishlist();ensureWishlistLink()}});
+  window.addEventListener('hashchange',()=>{if(location.hash.slice(1)==='wishlist')renderWishlist();ensureWishlistLink()});
+  function enhance(){addDiscovery();addProductTools();addToast();improveSearch();improveMenu();ensureWishlistLink();if(location.hash.slice(1)==='wishlist'&&!document.querySelector('.ux-wishlist-page'))renderWishlist()}
   const app=document.querySelector('#app');
   let enhancing=false,scheduled=false;
   enhance();
