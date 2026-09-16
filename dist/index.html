@@ -174,7 +174,7 @@
   <main id="cart" class="view"><section class="viewInner cartLayout"><span class="eyebrow">Din beställning</span><h2>Varukorg</h2><p>Här samlas dina valda verk innan den framtida kassan kopplas på.</p><div id="cartItems"></div><div id="cartSummary"></div><a class="button" href="#works" data-route="works">Fortsätt handla</a></section></main>
   <div id="productViews"></div><footer><span>Angie's Art · Konst för ditt rum</span><nav><a href="#information" data-route="information">Information</a><a href="#prints" data-route="prints">Prints</a><a href="#about" data-route="about">Om</a></nav></footer>
   <script>
-    const palette=['#ef5b43','#238b80','#2457c5','#f0aa2b','#d44778','#6954b7','#e35c32','#1779a8','#d33c55','#3b8f4f'];const products=Array.from({length:10},(_,i)=>({id:i+1,title:`Verk ${String(i+1).padStart(2,'0')}`,color:palette[i],price:'Pris kommer senare'}));
+    const palette=['#b97862','#71877f','#7888a2','#c7a85f','#b77d86','#8c819d','#a76e5e','#5e8290','#a96a72','#6b876d'];const products=Array.from({length:10},(_,i)=>({id:i+1,title:`Verk ${String(i+1).padStart(2,'0')}`,color:palette[i],price:'Pris kommer senare'}));
     const tile=p=>`<a class="tile" style="background:${p.color}" href="#product-${String(p.id).padStart(2,'0')}" data-route="product-${String(p.id).padStart(2,'0')}" aria-label="Visa ${p.title}"><span>${String(p.id).padStart(2,'0')}</span><small>${p.title} · Visa verk</small></a>`;document.querySelector('#homeGrid').innerHTML=products.slice(0,5).map(tile).join('');document.querySelector('#worksGrid').innerHTML=products.map(tile).join('');document.querySelector('#collectionGrid').innerHTML=products.slice(0,4).map(tile).join('');
     const productViews=document.querySelector('#productViews');productViews.innerHTML=products.map(p=>`<main id="product-${String(p.id).padStart(2,'0')}" class="view"><section class="viewInner product"><div class="productArt" style="background:${p.color}">${String(p.id).padStart(2,'0')}</div><div class="productInfo"><span class="eyebrow">Angie's Art · ${p.title}</span><h2>${p.title}</h2><p>Ett uttrycksfullt verk presenterat i flera vyer. Välj storlek och format för att förbereda din beställning.</p><div class="productPrice">${p.price}</div><p class="purchaseMeta">Material, upplaga och slutligt pris kompletteras före lansering.</p><div class="option"><label for="size-${p.id}">Storlek</label><select id="size-${p.id}"><option>Välj storlek</option><option>Liten</option><option>Mellan</option><option>Stor</option></select></div><div class="option"><label for="format-${p.id}">Format</label><select id="format-${p.id}"><option>Välj format</option><option>Fine Art Print</option><option>Limited Edition</option><option>Originalverk</option></select></div><button class="button" data-add="${p.id}">Lägg i varukorg</button><a class="button" href="#works" data-route="works">Tillbaka till konstverken</a><div class="productDetails"><details open><summary>Produktinformation</summary><p>Här presenteras verkets material, framställning, mått och eventuell upplaga när produktstandarden är fastställd.</p></details><details><summary>Frakt och retur</summary><p>Leveranssätt, kostnad, leveranstid och returvillkor visas här när företagets villkor är beslutade.</p></details><details><summary>Kundsupport</summary><p>Här kommer kontaktvägen för frågor om verket, format, beställning och leverans före lansering.</p></details></div></div></section></main>`).join('');
     const routes=['home','works','collections','about','prints','information','cart',...products.map(p=>`product-${String(p.id).padStart(2,'0')}`)];let cart=0;function go(route){routes.forEach(r=>document.getElementById(r)?.classList.toggle('active',r===route));document.querySelectorAll('[data-route]').forEach(a=>a.classList.toggle('active',a.dataset.route===route));window.scrollTo({top:0,behavior:'smooth'});history.replaceState(null,'','#'+route)}document.addEventListener('click',e=>{const a=e.target.closest('[data-route]');if(a){e.preventDefault();go(a.dataset.route)}const add=e.target.closest('[data-add]');if(add){cart++;document.querySelector('#cartCount').textContent=cart;add.textContent='Tillagd i varukorg';add.disabled=true}});window.addEventListener('hashchange',()=>go(location.hash.slice(1)||'home'));
@@ -1318,5 +1318,60 @@
       function syncCart(){if(location.hash==='#cart'&&typeof renderProfessionalCart==='function')renderProfessionalCart();}
       syncCart();window.addEventListener('hashchange',syncCart);
     })();
+  </script>
+  <style id="website-v02-editorial-pass">
+    :root{--editorial-ink:#332b2a;--editorial-muted:#786d67;--editorial-paper:#f7f3ed;--editorial-rule:rgba(51,43,42,.22)}
+    body{background:var(--editorial-paper);color:var(--editorial-ink)}
+    body:before{display:none}
+    header{background:var(--editorial-paper)!important;border-bottom:1px solid var(--editorial-rule)!important;backdrop-filter:none!important}
+    .nav .orbit{background:var(--editorial-ink)!important;color:var(--editorial-paper)!important;border-radius:50%;box-shadow:none!important}
+    .brand{color:var(--editorial-ink)!important}
+    .brand:after{max-width:110px}
+    .hero{position:relative;grid-template-columns:minmax(220px,330px) minmax(340px,620px) minmax(220px,300px);align-items:end;min-height:calc(100dvh - 126px);padding-block:clamp(56px,10vh,150px)}
+    .hero:before{content:'ANGIE\2019S ART / 001';position:absolute;top:clamp(24px,4vh,54px);left:0;color:var(--editorial-muted);font-size:.68rem;letter-spacing:.16em}
+    #home .heroIntro{align-self:end}
+    #home .heroIntro .eyebrow{color:var(--editorial-muted)}
+    #home .heroIntro h1{font-size:clamp(3.4rem,5.7vw,7rem);letter-spacing:-.075em}
+    #home .heroIntro p{font-size:.98rem;line-height:1.7}
+    #home .heroArt{aspect-ratio:5/6;max-height:min(72vh,760px);justify-self:center;width:min(100%,620px);position:relative}
+    #home .heroArt .artFace{border-radius:0;background:linear-gradient(145deg,#b97862 0 34%,#dfc39b 34% 67%,#71877f 67%)}
+    #home .heroArt:before{content:'';position:absolute;inset:-14px;border:1px solid var(--editorial-rule);z-index:-1}
+    #home .heroArt:after{bottom:-34px;left:auto;right:0}
+    #home .artNo{font-size:clamp(8rem,16vw,15rem);color:rgba(247,243,237,.82)}
+    #home .heroSide{align-self:end}
+    #home .shopIndex{border-top:1px solid var(--editorial-rule);border-bottom:1px solid var(--editorial-rule);padding:22px 0 10px}
+    .shopIndex h3{font-family:'DM Sans',sans-serif;font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+    .shopIndexIntro{line-height:1.7}
+    .shopIndexLink{border-top:1px solid var(--editorial-rule);color:var(--editorial-ink)}
+    .shopIndexNo{background:transparent;color:var(--editorial-ink);border:1px solid var(--editorial-rule)}
+    .section,.viewInner{padding-block:clamp(80px,12vw,180px)}
+    .selectedWorks{border-top:0;background:var(--editorial-paper)!important}
+    .sectionHead{align-items:start;margin-bottom:clamp(34px,6vw,84px)}
+    .sectionHead h2,.viewInner>h2{font-size:clamp(3.4rem,7vw,9rem);letter-spacing:-.085em;font-weight:500}
+    .sectionHead p{max-width:30ch;line-height:1.7}
+    .grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
+    .tile{border-radius:0;aspect-ratio:1/1.25;border-right:1px solid rgba(247,243,237,.65);border-bottom:1px solid rgba(247,243,237,.65);font-size:clamp(3rem,5vw,6rem);box-shadow:none!important}
+    .tile:nth-child(3n){aspect-ratio:1/1.05}.tile:nth-child(4n){transform:translateY(38px)}.tile:nth-child(4n):hover{transform:translateY(32px)}
+    .tile small{opacity:1;bottom:18px;left:18px;color:rgba(247,243,237,.85);font-size:.65rem}
+    .shopNote{border-top:1px solid var(--editorial-rule);padding-top:22px}
+    .statement{background:#332b2a!important;padding-block:clamp(80px,12vw,170px)!important}
+    .statement h2{font-size:clamp(3.2rem,7vw,8rem);letter-spacing:-.08em}
+    .viewInner>p{max-width:42ch;line-height:1.8}
+    .collectionCard,.cartSummaryCard{border-radius:0;background:#eee8df!important;border:0;box-shadow:none!important}
+    .product{grid-template-columns:minmax(0,1.3fr) minmax(300px,.7fr);gap:clamp(36px,8vw,140px)}
+    #productViews .productArt{border-radius:0!important;box-shadow:none!important}
+    #productViews .productInfo{top:150px}
+    #productViews .productInfo h2{font-size:clamp(3.2rem,6vw,7rem);letter-spacing:-.08em}
+    .infoList{max-width:700px;margin-top:4rem}
+    .infoList div{padding-block:20px}
+    footer{padding-block:42px;border-top:1px solid var(--editorial-rule)}
+    @media(max-width:1050px){.hero{grid-template-columns:minmax(190px,260px) minmax(270px,1fr) minmax(190px,240px)}.tile:nth-child(4n){transform:none}.tile:nth-child(4n):hover{transform:translateY(-6px)}}
+    @media(max-width:760px){.hero{width:calc(100% - 40px);padding-block:72px 100px}.hero:before{top:28px}.heroArt:before{inset:-8px}.heroIntro h1,#home .heroIntro h1{font-size:clamp(3rem,15vw,5.2rem)}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tile{aspect-ratio:1/1.18}.tile:nth-child(3n){aspect-ratio:1/1.18}.statement{padding-inline:20px!important}.product{gap:40px}.viewInner>h2,.sectionHead h2{font-size:clamp(3.3rem,15vw,6rem)}}
+    @media(max-width:380px){.hero{width:calc(100% - 28px)}.grid{grid-template-columns:1fr}.tile{aspect-ratio:1/1.1}}
+    @media(max-width:1050px){header{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;min-height:76px!important;padding:14px 20px!important}.brand{position:static!important;flex:1 1 auto!important;min-width:0!important}.right{position:static!important;display:flex!important;flex:0 0 auto!important;align-items:center!important;gap:8px!important}.right button{white-space:nowrap!important}.nav{display:none!important}.nav.mobileOpen{display:flex!important;position:absolute!important;left:20px!important;right:20px!important;top:76px!important;z-index:40!important}}
+    @media(max-width:380px){.right button:first-child{display:none!important}.brand{font-size:1rem!important}}
+  </style>
+  <script id="website-v02-style-loader">
+    (function(){var style=document.getElementById('website-v02-editorial-pass');if(style&&document.head&&style.parentNode!==document.head)document.head.appendChild(style);var hero=document.querySelector('#home .hero'),art=document.querySelector('#home .heroArt'),intro=document.querySelector('#home .heroIntro'),side=document.querySelector('#home .heroSide');function sync(){if(!hero)return;if(innerWidth<=760){hero.style.setProperty('display','flex','important');hero.style.setProperty('flex-direction','column','important');hero.style.setProperty('width','calc(100% - 40px)','important');hero.style.setProperty('align-items','stretch','important');art?.style.setProperty('width','100%','important');art?.style.setProperty('margin-top','28px','important');intro?.style.setProperty('width','100%','important');side?.style.setProperty('width','100%','important');}else{hero.style.removeProperty('display');hero.style.removeProperty('flex-direction');hero.style.removeProperty('width');art?.style.removeProperty('width');art?.style.removeProperty('margin-top');intro?.style.removeProperty('width');side?.style.removeProperty('width');}}sync();window.addEventListener('resize',sync);})();
   </script>
 </body></html>
