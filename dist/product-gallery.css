@@ -8,6 +8,7 @@
 .product-lightbox.open{opacity:1;pointer-events:auto}
 .product-lightbox figure{position:relative;width:min(92vw,72rem);height:min(88vh,58rem);margin:0;display:grid;place-items:center;cursor:grab;touch-action:none}
 .product-lightbox figure.is-dragging{cursor:grabbing}
+.product-lightbox figure:focus-visible{outline:2px solid #fff;outline-offset:8px}
 .product-lightbox img{max-width:100%;max-height:100%;object-fit:contain;transform-origin:center;user-select:none;pointer-events:none;will-change:transform}
 .product-lightbox-close{position:absolute;top:-.5rem;right:-.5rem;width:2.8rem;height:2.8rem;border:1px solid #fff8;background:#292426;color:#fff;font-size:1.3rem}
 .product-lightbox-hint{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);padding:.5rem .7rem;background:#fffdfae8;color:var(--fg);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}

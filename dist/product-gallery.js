@@ -31,17 +31,19 @@
   function openLightbox(src,alt){
     let box=document.querySelector('.product-lightbox');
     if(!box){
-      box=document.createElement('div');box.className='product-lightbox';box.innerHTML='<figure><button class="product-lightbox-close" type="button" aria-label="Stäng bildvisning">×</button><img alt=""><span class="product-lightbox-hint">Dra för att panorera · scrolla för att zooma</span></figure>';document.body.append(box);
+      box=document.createElement('div');box.className='product-lightbox';box.innerHTML='<figure tabindex="0" aria-label="Panorera i den förstorade bilden med mus, touch eller piltangenter"><button class="product-lightbox-close" type="button" aria-label="Stäng bildvisning">×</button><img alt=""><span class="product-lightbox-hint">Dra för att panorera · scrolla för att zooma</span></figure>';document.body.append(box);
       const figure=box.querySelector('figure'),modalImage=box.querySelector('img');let scale=1,x=0,y=0,startX=0,startY=0,dragging=false;
       const limits=()=>({x:Math.max(0,(modalImage.clientWidth*scale-figure.clientWidth)/2+24),y:Math.max(0,(modalImage.clientHeight*scale-figure.clientHeight)/2+24)});
       const apply=()=>{const max=limits();x=clamp(x,-max.x,max.x);y=clamp(y,-max.y,max.y);modalImage.style.transform=`translate3d(${x}px,${y}px,0) scale(${scale})`};
       const reset=()=>{scale=1;x=0;y=0;apply()};
       const zoom=amount=>{scale=clamp(scale+amount,1,4);apply()};
-      figure.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;dragging=true;figure.classList.add('is-dragging');figure.setPointerCapture(e.pointerId);startX=e.clientX-x;startY=e.clientY-y});
-      figure.addEventListener('pointermove',e=>{if(dragging){x=e.clientX-startX;y=e.clientY-startY;apply()}});
-      ['pointerup','pointercancel'].forEach(type=>figure.addEventListener(type,e=>{dragging=false;figure.classList.remove('is-dragging');try{figure.releasePointerCapture(e.pointerId)}catch{}}));
+      const move=e=>{if(dragging){e.preventDefault();x=e.clientX-startX;y=e.clientY-startY;apply()}};
+      const stop=e=>{if(!dragging)return;dragging=false;figure.classList.remove('is-dragging');try{figure.releasePointerCapture(e.pointerId)}catch{}};
+      figure.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;e.preventDefault();dragging=true;figure.classList.add('is-dragging');figure.setPointerCapture(e.pointerId);startX=e.clientX-x;startY=e.clientY-y});
+      window.addEventListener('pointermove',move,{passive:false});window.addEventListener('pointerup',stop);window.addEventListener('pointercancel',stop);
       figure.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY<0?.22:-.22)},{passive:false});
       figure.addEventListener('dblclick',()=>zoom(scale>1?-1:.8));
+      figure.addEventListener('keydown',e=>{const step=48;if(e.key==='ArrowLeft'){e.preventDefault();x-=step;apply()}else if(e.key==='ArrowRight'){e.preventDefault();x+=step;apply()}else if(e.key==='ArrowUp'){e.preventDefault();y-=step;apply()}else if(e.key==='ArrowDown'){e.preventDefault();y+=step;apply()}else if(e.key==='Home'){e.preventDefault();reset()}});
       box._reset=reset;
       box.addEventListener('click',e=>{if(e.target===box||e.target.closest('.product-lightbox-close'))closeLightbox()});box.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()})
     }
