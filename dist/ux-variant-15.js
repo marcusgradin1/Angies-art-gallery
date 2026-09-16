@@ -59,6 +59,21 @@
   }
   document.addEventListener('click',e=>{const view=e.target.closest('.product-view');if(!view)return;setTimeout(()=>{const labels=['Verket','I ett rum','Material & yta'];const label=document.querySelector('.product-stage-label');const active=[...document.querySelectorAll('.product-view')].indexOf(view);if(label&&labels[active])label.textContent=`0${active+1} / ${labels[active]}`},0)});
   function enhance(){addDiscovery();addProductTools();addToast();improveSearch();improveMenu()}
+  const app=document.querySelector('#app');
+  let enhancing=false,scheduled=false;
   enhance();
-  new MutationObserver(enhance).observe(document.querySelector('#app')||document.body,{childList:true,subtree:true});
+  if(app){
+    const observer=new MutationObserver(()=>{
+      if(enhancing||scheduled)return;
+      scheduled=true;
+      queueMicrotask(()=>{
+        scheduled=false;
+        if(enhancing)return;
+        enhancing=true;
+        observer.disconnect();
+        try{enhance()}finally{enhancing=false;observer.observe(app,{childList:true,subtree:true})}
+      });
+    });
+    observer.observe(app,{childList:true,subtree:true});
+  }
 })();
