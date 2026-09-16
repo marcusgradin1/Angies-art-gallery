@@ -18,6 +18,16 @@
       const status=document.createElement('div');status.className='ux-view-status';status.innerHTML='<span>Bildvisning</span><span>Tre perspektiv · klicka för fullscreen</span>';
       stage.after(status);
     }
+    const labels=['Verket','I ett rum','Material & yta'];
+    document.querySelectorAll('.product-view').forEach((view,index)=>{
+      const label=view.querySelector('span');
+      if(label&&labels[index])label.textContent=`0${index+1} / ${labels[index]}`;
+      if(labels[index])view.setAttribute('aria-label',`Visa ${labels[index].toLowerCase()}`);
+    });
+    const activeView=document.querySelector('.product-view.active');
+    const activeIndex=activeView?[...document.querySelectorAll('.product-view')].indexOf(activeView):0;
+    const stageLabel=stage.querySelector('.product-stage-label');
+    if(stageLabel&&labels[activeIndex])stageLabel.textContent=`0${activeIndex+1} / ${labels[activeIndex]}`;
   }
   function addToast(){
     if(document.querySelector('.ux-toast'))return;
@@ -28,6 +38,7 @@
     const toggle=document.querySelector('#searchToggle'),input=document.querySelector('#searchInput');
     if(toggle&&input&&!toggle.dataset.uxReady){toggle.dataset.uxReady='true';toggle.addEventListener('click',()=>setTimeout(()=>input.focus(),0))}
   }
+  document.addEventListener('click',e=>{const view=e.target.closest('.product-view');if(!view)return;setTimeout(()=>{const labels=['Verket','I ett rum','Material & yta'];const label=document.querySelector('.product-stage-label');const active=[...document.querySelectorAll('.product-view')].indexOf(view);if(label&&labels[active])label.textContent=`0${active+1} / ${labels[active]}`},0)});
   function enhance(){addDiscovery();addProductTools();addToast();improveSearch()}
   enhance();
   new MutationObserver(enhance).observe(document.querySelector('#app')||document.body,{childList:true,subtree:true});
