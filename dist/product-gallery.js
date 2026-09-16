@@ -25,6 +25,7 @@
     controls.addEventListener('click',e=>{const zoomButton=e.target.closest('[data-gallery-zoom]');if(zoomButton)zoom(zoomButton.dataset.galleryZoom==='in'?.2:-.2);if(e.target.closest('[data-gallery-reset]'))reset()});
     stage.addEventListener('dblclick',()=>zoom(scale>1?-1:.7));
     stage.addEventListener('click',e=>{if(e.target.closest('button')||dragging||moved){moved=false;return}openLightbox(image.src,image.alt)});
+    stage.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!e.target.closest('button')){e.preventDefault();openLightbox(image.src,image.alt)}});
     active={reset,zoom,image};
   }
   function openLightbox(src,alt){
