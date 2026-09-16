@@ -28,6 +28,7 @@ body[data-variant="15"] .nav{display:none}
 body[data-variant="15"] .nav.open{position:absolute;z-index:20;top:calc(100% + .65rem);right:clamp(1rem,5vw,6rem);display:grid;grid-template-columns:repeat(2,minmax(9rem,1fr));gap:.25rem;padding:.75rem;background:var(--bg);border:1px solid var(--line);box-shadow:0 1rem 2rem #29242618}
 body[data-variant="15"] .nav.open a{padding:.8rem;color:var(--fg);background:var(--paper)}
 body[data-variant="15"] .nav.open a:hover,body[data-variant="15"] .nav.open a:focus-visible{background:var(--fg);color:var(--bg)}
+@media(min-width:1001px){body[data-variant="15"] .header{grid-template-columns:auto 1fr auto}body[data-variant="15"] .header .actions{justify-self:initial}body[data-variant="15"] .nav{display:flex}body[data-variant="15"] .nav.open{position:static;display:flex;grid-template-columns:none;gap:clamp(1rem,2.5vw,2.8rem);padding:0;background:transparent;border:0;box-shadow:none}body[data-variant="15"] .nav.open a{padding:.5rem 0;background:transparent}}
 body[data-variant="15"] .ux-wishlist-page{max-width:var(--max);margin:0 auto;padding:clamp(3rem,8vw,7rem) clamp(1.2rem,5vw,6rem)}
 body[data-variant="15"] .ux-wishlist-page__intro{display:flex;justify-content:space-between;gap:2rem;align-items:end;margin-bottom:3rem}
 body[data-variant="15"] .ux-wishlist-page__intro h1{margin:.6rem 0 0;font:400 clamp(3rem,7vw,7rem)/.86 var(--serif);letter-spacing:-.09em}
