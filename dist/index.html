@@ -109,6 +109,59 @@
     footer{background:rgba(255,250,247,.88);border-top-color:rgba(67,43,57,.16)}
     @media(max-width:760px){.brand{font-size:1.6rem}.heroIntro:after{display:none}}
   </style>
+<style id="website-v02-foundation">
+  :root{
+    --v02-ink:#302826;--v02-muted:#746863;--v02-paper:#f8f5ef;--v02-surface:#fffdf9;
+    --v02-line:rgba(48,40,38,.18);--v02-accent:#9a655b;--v02-max:1440px;
+    --v02-space:clamp(1rem,2vw,2rem);--v02-radius:4px
+  }
+  html{background:var(--v02-paper)}
+  body{background:var(--v02-paper);color:var(--v02-ink);font-family:'DM Sans',sans-serif}
+  body:before{opacity:.16;background:linear-gradient(180deg,rgba(248,245,239,.96),rgba(248,245,239,.88)),url('./art-background.png') center/cover no-repeat}
+  header{position:sticky;top:0;grid-template-columns:minmax(150px,1fr) auto minmax(150px,1fr);width:100%;max-width:none;gap:clamp(18px,4vw,72px);min-height:92px;padding:18px clamp(20px,4vw,64px);background:rgba(248,245,239,.94);border-bottom:1px solid var(--v02-line);backdrop-filter:blur(14px)}
+  .brand{font-size:clamp(1.05rem,1.5vw,1.4rem);letter-spacing:-.02em}
+  .brand:after{content:'';display:block;width:100%;max-width:132px;margin-top:8px;border-bottom:1px solid currentColor}
+  .headerMotif{display:none}
+  .nav{display:flex;align-items:center;justify-content:center;gap:clamp(16px,2.4vw,42px);padding:0;position:static;white-space:nowrap}
+  .nav a:not(.orbit){grid-row:auto;align-self:auto;font-size:clamp(.68rem,.75vw,.8rem);letter-spacing:.1em;text-transform:uppercase}
+  .nav .orbit{width:clamp(72px,7vw,104px);height:clamp(72px,7vw,104px);font-size:clamp(1.2rem,2vw,2rem);background:#e8c4be;color:var(--v02-ink)!important;box-shadow:0 10px 25px rgba(100,70,60,.12);flex:0 0 auto}
+  .nav:before,.nav:after,.navWing{display:none}
+  .right{gap:clamp(12px,1.8vw,26px);font-size:clamp(.68rem,.75vw,.8rem);letter-spacing:.1em}
+  .right button{min-height:44px}
+  main{max-width:none}
+  .hero{width:min(100% - 2*clamp(20px,5vw,80px),var(--v02-max));min-height:calc(100dvh - 92px);margin:0 auto;padding:clamp(48px,8vh,120px) 0;grid-template-columns:minmax(220px,300px) minmax(280px,560px) minmax(220px,300px);gap:clamp(24px,5vw,96px)}
+  #home .heroIntro{max-width:100%;padding:0;background:transparent;border:0;border-radius:0;box-shadow:none;overflow:visible;align-self:center}
+  #home .heroIntro h1{font-size:clamp(2.5rem,4.7vw,5.5rem);line-height:.98;margin:.25em 0 .35em}
+  .heroIntro p{max-width:25ch}
+  .button{border-radius:var(--v02-radius);padding:12px 16px;letter-spacing:.1em}
+  #home .heroArt{width:100%;padding:0;background:transparent;border:0;border-radius:0;box-shadow:none;filter:none;transform:none}
+  #home .heroArt .artFace{inset:0;border-radius:var(--v02-radius)}
+  .heroArt:after{content:'01 · UTVALT VERK';position:absolute;left:0;bottom:-28px;color:var(--v02-muted);font:500 .68rem 'DM Sans',sans-serif;letter-spacing:.12em}
+  #home .heroSide{align-self:center;min-height:0;padding:0;align-items:stretch}
+  #home .shopIndex{width:100%;padding:0 0 12px;background:transparent;border:0;border-bottom:1px solid var(--v02-line);border-radius:0;box-shadow:none}
+  .shopIndex h3{font-size:clamp(1.6rem,2.4vw,2.4rem);margin:.35em 0 .7em}
+  .shopIndexLink{padding:14px 0;font-size:.72rem}
+  .shopIndexNo{background:var(--v02-ink);width:24px;height:24px}
+  .section,.viewInner{width:min(100% - 2*clamp(20px,5vw,80px),var(--v02-max));margin-inline:auto;padding:clamp(64px,10vw,144px) 0}
+  .selectedWorks{background:transparent;border-top:1px solid var(--v02-line);border-bottom:1px solid var(--v02-line)}
+  .sectionHead{margin-bottom:clamp(28px,5vw,64px)}
+  .sectionHead h2,.viewInner>h2{font-size:clamp(2.5rem,6vw,7rem);letter-spacing:-.065em}
+  .grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2.2vw,32px)}
+  .tile{border-radius:var(--v02-radius);box-shadow:none;transition:transform .35s ease}
+  .tile:hover{box-shadow:none;transform:translateY(-6px)}
+  .statement{width:100%;max-width:none;padding-inline:max(clamp(20px,5vw,80px),calc((100% - var(--v02-max))/2));background:var(--v02-ink);color:var(--v02-paper)}
+  .statement p{color:#d9d0c9}
+  .product{max-width:var(--v02-max);grid-template-columns:minmax(0,1.45fr) minmax(300px,.75fr);gap:clamp(32px,7vw,120px)}
+  #productViews .productInfo{background:transparent;border:0;box-shadow:none;border-radius:0;padding:0;position:sticky;top:130px}
+  #productViews .productMediaStack .productArt{border-radius:var(--v02-radius);box-shadow:none}
+  .cartShell{grid-template-columns:minmax(0,1fr) 340px}
+  .cartSummaryCard{background:var(--v02-surface);border:1px solid var(--v02-line);border-radius:var(--v02-radius);box-shadow:none}
+  footer{width:min(100% - 2*clamp(20px,5vw,80px),var(--v02-max));margin:0 auto;padding-inline:0;border-top:1px solid var(--v02-line)}
+  @media(max-width:1050px){header{grid-template-columns:1fr auto;gap:20px}.nav{display:none}.nav.mobileOpen{display:flex;position:absolute;left:20px;right:20px;top:84px;padding:20px;justify-content:space-around;background:var(--v02-surface);border:1px solid var(--v02-line);border-radius:var(--v02-radius);box-shadow:0 18px 40px rgba(48,40,38,.12)}.hero{grid-template-columns:minmax(180px,260px) minmax(240px,1fr) minmax(180px,240px);gap:clamp(16px,3vw,40px)}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  @media(max-width:760px){header{min-height:76px;padding:14px 20px}.brand{font-size:1.12rem}.right{gap:8px}.right button{min-height:44px}.hero{display:flex;flex-direction:column;align-items:stretch;min-height:auto;padding:56px 0 80px}.heroArt{order:1;width:min(100%,520px)!important;align-self:center}.heroIntro{order:2!important;width:100%;padding-top:56px!important}.heroSide{order:3!important;width:100%}.heroIntro p{max-width:34ch}.section,.viewInner{padding-block:64px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.sectionHead,.shopNote{display:block}.sectionHead p,.shopNote p{margin-top:16px}.product{display:flex;flex-direction:column}.productGallery{order:1}.productInfo{order:2}.productArt{min-height:0!important;height:min(78svh,620px)!important}.cartShell{grid-template-columns:1fr}.cartSummaryCard{position:static}.cartHeader{display:block}.cartHeader p{margin-top:16px}.footer,footer{gap:28px}}
+  @media(max-width:380px){header{padding-inline:14px}.right button:first-child{display:none}.grid{grid-template-columns:1fr}.section,.viewInner{width:calc(100% - 28px)}.hero{width:calc(100% - 28px)}}
+  @media(prefers-reduced-motion:reduce){.heroArt:hover,.tile:hover{transform:none}}
+</style>
 </head>
 <body>
   <header><a class="brand" href="#home" data-route="home">Angie's Art</a><div class="headerMotif headerMotifLeft" aria-hidden="true"><img src="./header-hand-painting.png" alt="" loading="eager"></div><nav class="nav"><a href="#works" data-route="works">Konstverk</a><a href="#collections" data-route="collections">Kollektioner</a><a class="orbit" href="#home" data-route="home" aria-label="Hem">AG</a><a href="#about" data-route="about">Om</a><a href="#prints" data-route="prints">Prints</a></nav><div class="headerMotif headerMotifRight" aria-hidden="true"><img src="./header-hand-paint-can.png" alt="" loading="eager"></div><div class="right"><button id="searchBtn" aria-expanded="false">Sök</button><button id="cartBtn">Varukorg <span class="cartCount" id="cartCount">0</span></button><button class="mobileMenu" id="menuBtn" aria-label="Öppna meny">☰</button></div><div class="searchPanel" id="searchPanel"><label class="sr" for="searchInput">Sök efter konstverk</label><input id="searchInput" placeholder="Sök efter konstverk"><p id="searchResult">Sök bland verk 01 till 10</p></div></header>
@@ -1188,6 +1241,82 @@
         else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
       });
       document.documentElement.classList.add('responsive-v02-ready');
+    })();
+  </script>
+  <style id="website-v02-final-cascade">
+    @media(min-width:1051px){
+      header{grid-template-columns:minmax(150px,1fr) minmax(560px,760px) minmax(150px,1fr)}
+      .nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) clamp(82px,7vw,104px) repeat(3,minmax(0,1fr));grid-template-rows:1fr 30px;gap:8px 10px;width:100%;align-items:center}
+      .nav .orbit{grid-column:4;grid-row:1;justify-self:center;align-self:center}
+      .nav:before,.nav:after{display:block;position:static;top:auto;left:auto;right:auto;transform:none;z-index:1;color:var(--v02-ink);font:500 clamp(1.35rem,2.2vw,2.2rem)/1 'Playfair Display',serif;letter-spacing:-.05em;opacity:1;white-space:nowrap}
+      .nav:before{content:"ANGIE'S";grid-column:2;grid-row:1;text-align:right}
+      .nav:after{content:"GALLERY";grid-column:6;grid-row:1;text-align:left}
+      .nav a:not(.orbit){grid-row:2;align-self:start;justify-self:center;white-space:nowrap}
+      .nav a[data-route="gallery"]{grid-column:1}.nav a[data-route="collections"]{grid-column:2}.nav a[data-route="prints"]{grid-column:3}
+      .nav a[data-route="studio"]{grid-column:5}.nav a[data-route="works"]{grid-column:6}.nav a[data-route="about"]{grid-column:7}
+    }
+  </style>
+  <style id="website-v02-endpoint-cascade">
+  @media(min-width:1051px){
+    header{grid-template-columns:minmax(150px,1fr) minmax(560px,760px) minmax(150px,1fr)!important;overflow:visible!important}
+    header>.nav{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr)) clamp(82px,7vw,104px) repeat(3,minmax(0,1fr))!important;grid-template-rows:1fr 30px!important;gap:8px 10px!important;position:static!important;width:100%!important;padding:0!important;background:transparent!important;box-shadow:none!important}
+    header>.nav:before,header>.nav:after{display:block!important;position:static!important;transform:none!important;top:auto!important;left:auto!important;right:auto!important;z-index:1!important;color:var(--v02-ink)!important;font:500 clamp(1.35rem,2.2vw,2.2rem)/1 'Playfair Display',serif!important;letter-spacing:-.05em!important;opacity:1!important;white-space:nowrap!important}
+    header>.nav:before{content:"ANGIE'S"!important;grid-column:2!important;grid-row:1!important;text-align:right!important}
+    header>.nav:after{content:"GALLERY"!important;grid-column:6!important;grid-row:1!important;text-align:left!important}
+    header>.nav .orbit{grid-column:4!important;grid-row:1!important;justify-self:center!important;align-self:center!important}
+    header>.nav>a:not(.orbit){grid-row:2!important;align-self:start!important;justify-self:center!important;white-space:nowrap!important}
+    header>.nav a[data-route="gallery"]{grid-column:1!important}header>.nav a[data-route="collections"]{grid-column:2!important}header>.nav a[data-route="prints"]{grid-column:3!important}
+    header>.nav a[data-route="studio"]{grid-column:5!important}header>.nav a[data-route="works"]{grid-column:6!important}header>.nav a[data-route="about"]{grid-column:7!important}
+  }
+  @media(max-width:1050px){header>.nav:before,header>.nav:after{display:none!important}}
+  </style>
+  <style id="website-v02-header-grid-fix">
+    @media(min-width:1051px){
+      header>.nav{grid-template-columns:repeat(3,minmax(0,1fr)) clamp(82px,7vw,104px) repeat(3,minmax(0,1fr))!important;grid-template-rows:56px 30px!important;align-items:center!important;overflow:visible!important}
+      header>.nav:before{grid-column:1!important;grid-row:1!important;text-align:right!important}
+      header>.nav:after{grid-column:7!important;grid-row:1!important;text-align:left!important}
+      header>.nav>a:nth-of-type(1){grid-column:1!important;grid-row:2!important}
+      header>.nav>a:nth-of-type(2){grid-column:2!important;grid-row:2!important}
+      header>.nav>a:nth-of-type(3){grid-column:3!important;grid-row:2!important}
+      header>.nav>a:nth-of-type(4){grid-column:4!important;grid-row:1!important}
+      header>.nav>a:nth-of-type(5){grid-column:5!important;grid-row:2!important}
+      header>.nav>a:nth-of-type(6){grid-column:6!important;grid-row:2!important}
+      header>.nav>a:nth-of-type(7){grid-column:7!important;grid-row:2!important}
+    }
+  </style>
+  <script id="website-v02-layout-guard">
+    (function(){
+      var header=document.querySelector('header'),nav=document.querySelector('header>.nav');
+      if(!header||!nav)return;
+      ['.headerMotifLeft','.headerMotifRight'].forEach(function(selector){var el=document.querySelector(selector);if(el)el.style.setProperty('display','none','important');});
+      header.style.setProperty('grid-template-columns','minmax(150px,1fr) minmax(560px,760px) minmax(150px,1fr)','important');
+      nav.style.setProperty('display','grid','important');
+      nav.style.setProperty('grid-template-columns','repeat(3,minmax(0,1fr)) clamp(82px,7vw,104px) repeat(3,minmax(0,1fr))','important');
+      nav.style.setProperty('grid-template-rows','56px 30px','important');
+    })();
+  </script>
+  <script id="website-v02-desktop-header-guard">
+    (function(){
+      var header=document.querySelector('header'),nav=document.querySelector('header>.nav'),brand=document.querySelector('.brand'),right=document.querySelector('.right');
+      if(!header||!nav||!brand||!right)return;
+      function sync(){
+        var desktop=window.matchMedia('(min-width:1051px)').matches;
+        if(desktop){
+          header.style.setProperty('display','block','important');header.style.setProperty('min-height','126px','important');
+          brand.style.setProperty('position','absolute','important');brand.style.setProperty('left','clamp(20px,4vw,64px)','important');brand.style.setProperty('top','28px','important');
+          right.style.setProperty('position','absolute','important');right.style.setProperty('right','clamp(20px,4vw,64px)','important');right.style.setProperty('top','36px','important');
+          nav.style.setProperty('position','absolute','important');nav.style.setProperty('left','50%','important');nav.style.setProperty('top','10px','important');nav.style.setProperty('transform','translateX(-50%)','important');nav.style.setProperty('width','min(760px,58vw)','important');
+        }else{
+          [header,brand,right,nav].forEach(function(el){el.removeAttribute('style');});
+        }
+      }
+      sync();window.addEventListener('resize',sync);
+    })();
+  </script>
+  <script id="website-v02-route-guard">
+    (function(){
+      function syncCart(){if(location.hash==='#cart'&&typeof renderProfessionalCart==='function')renderProfessionalCart();}
+      syncCart();window.addEventListener('hashchange',syncCart);
     })();
   </script>
 </body></html>
