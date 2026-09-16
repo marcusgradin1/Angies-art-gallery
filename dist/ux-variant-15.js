@@ -14,6 +14,8 @@
     const stage=document.querySelector('[data-product-stage]');
     const product=document.querySelector('.product');
     if(!stage||!product)return;
+    const productInfo=document.querySelector('.details details');
+    if(productInfo&&!productInfo.dataset.variant15Initialized){productInfo.removeAttribute('open');productInfo.dataset.variant15Initialized='true'}
     document.querySelector('.product-view-grid')?.remove();
     document.querySelector('.product-gallery > .eyebrow')?.remove();
     const stageLabel=stage.querySelector('.product-stage-label');
