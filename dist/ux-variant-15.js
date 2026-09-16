@@ -46,6 +46,10 @@
     const menu=document.querySelector('#menuToggle');
     if(menu&&!menu.dataset.uxReady){menu.dataset.uxReady='true';menu.setAttribute('aria-label','Öppna alla sidor');menu.title='Öppna alla sidor';menu.addEventListener('click',()=>setTimeout(()=>menu.setAttribute('aria-expanded',document.querySelector('#nav')?.classList.contains('open')?'true':'false'),0))}
   }
+  function removeMenu(){
+    document.querySelector('#menuToggle')?.remove();
+    document.querySelector('#nav')?.classList.remove('open');
+  }
   function savedIds(){return JSON.parse(localStorage.getItem('angies-art-wishlist')||'[]')}
   function ensureWishlistLink(){
     const nav=document.querySelector('#nav');
@@ -64,7 +68,7 @@
   }
   document.addEventListener('click',e=>{const link=e.target.closest('.ux-wishlist-link');if(link){e.preventDefault();location.hash='wishlist'}const remove=e.target.closest('[data-wishlist-remove]');if(remove){const next=savedIds().filter(id=>id!==remove.dataset.wishlistRemove);localStorage.setItem('angies-art-wishlist',JSON.stringify(next));renderWishlist();ensureWishlistLink()}});
   window.addEventListener('hashchange',()=>{if(location.hash.slice(1)==='wishlist')renderWishlist();ensureWishlistLink()});
-  function enhance(){addDiscovery();addProductTools();addToast();improveSearch();improveMenu();ensureWishlistLink();if(location.hash.slice(1)==='wishlist'&&!document.querySelector('.ux-wishlist-page'))renderWishlist()}
+  function enhance(){addDiscovery();addProductTools();addToast();improveSearch();improveMenu();removeMenu();ensureWishlistLink();if(location.hash.slice(1)==='wishlist'&&!document.querySelector('.ux-wishlist-page'))renderWishlist()}
   const app=document.querySelector('#app');
   let enhancing=false,scheduled=false;
   enhance();
