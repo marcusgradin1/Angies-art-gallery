@@ -47,7 +47,7 @@
   }
   function closeLightbox(){const box=document.querySelector('.product-lightbox');if(box){box.classList.remove('open');box.setAttribute('aria-hidden','true')}}
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
-  document.addEventListener('click',e=>{if(e.target.closest('[data-view]'))setTimeout(()=>active?.reset(),0)});
+  document.addEventListener('click',e=>{if(e.target.closest('button[data-view]'))setTimeout(()=>active?.reset(),0)});
   const observer=new MutationObserver(()=>setup());observer.observe(document.querySelector('#app')||document.body,{childList:true,subtree:true});
   setup();
 })();
