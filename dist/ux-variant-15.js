@@ -2,6 +2,7 @@
   const params=new URLSearchParams(location.search);
   if(params.get('variant')!=='15')return;
   document.body.dataset.variant='15';
+  if(!document.querySelector('link[data-room-scale-css]')){const style=document.createElement('link');style.rel='stylesheet';style.href='ux-variant-15.css?rev=real-room-scale-1';style.dataset.roomScaleCss='true';document.head.append(style)}
   function addDiscovery(){
     if(document.querySelector('.ux-discovery')||!document.querySelector('.hero'))return;
     const block=document.createElement('section');
@@ -30,8 +31,9 @@
     if(!document.querySelector('.ux-room-preview')){
       const room=document.createElement('section');room.className='ux-room-preview';room.setAttribute('aria-label','Se verket i ett rum');room.innerHTML='<div class="ux-room-preview__head"><div><span class="eyebrow">Fast miljö</span><strong>Se verket på väggen.</strong></div><p>Välj ett tillgängligt mått för att se proportionen i rummet.</p></div><div class="ux-room"><img class="ux-room__image" src="test-gallery-room.png" alt="Ljust galleri med en fri vägg"><img class="ux-room__art" src="assets/placeholders/art-01.jpg" alt="Verket placerat på väggen"></div><div class="ux-room__scale" role="group" aria-label="Välj tillgängligt mått"><button type="button" data-room-size="30 x 30 cm">30 × 30</button><button type="button" data-room-size="50 x 50 cm" class="is-active">50 × 50</button><button type="button" data-room-size="70 x 70 cm">70 × 70</button><button type="button" data-room-size="100 x 100 cm">100 × 100</button></div>';
       document.querySelector('.product-gallery').append(room);
-      const roomSizes={'30 x 30 cm':'13%','50 x 50 cm':'18%','70 x 70 cm':'25%','100 x 100 cm':'32%'};
-      const syncRoom=size=>{const value=size||'50 x 50 cm';room.querySelector('.ux-room__art').style.width=roomSizes[value]||'18%';room.querySelectorAll('[data-room-size]').forEach(item=>item.classList.toggle('is-active',item.dataset.roomSize===value))};
+      const wallWidthCm=400;
+      const sizeSpec=value=>{const match=value?.match(/(\d+(?:\.\d+)?)\s*x\s*(\d+(?:\.\d+)?)/i);if(!match)return{width:'12.5%',ratio:'1 / 1'};const width=Number(match[1]),height=Number(match[2]);return{width:`${Math.min(42,width/wallWidthCm*100)}%`,ratio:`${width} / ${height}`}};
+      const syncRoom=size=>{const spec=sizeSpec(size);const art=room.querySelector('.ux-room__art');art.style.width=spec.width;art.style.aspectRatio=spec.ratio;room.querySelectorAll('[data-room-size]').forEach(item=>item.classList.toggle('is-active',item.dataset.roomSize===size))};
       room.addEventListener('click',e=>{const button=e.target.closest('[data-room-size]');if(!button)return;const size=document.querySelector('.panel select[id^="size-"]');if(size&&!size.disabled){size.value=button.dataset.roomSize;size.dispatchEvent(new Event('change',{bubbles:true}))}syncRoom(button.dataset.roomSize)});
       const sizeSelect=document.querySelector('.panel select[id^="size-"]');if(sizeSelect){sizeSelect.addEventListener('change',()=>syncRoom(sizeSelect.value))}syncRoom(sizeSelect?.value);
     }
