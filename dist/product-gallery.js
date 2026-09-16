@@ -31,15 +31,16 @@
     let box=document.querySelector('.product-lightbox');
     if(!box){
       box=document.createElement('div');box.className='product-lightbox';box.innerHTML='<figure><button class="product-lightbox-close" type="button" aria-label="Stäng bildvisning">×</button><img alt=""><span class="product-lightbox-hint">Dra för att panorera · scrolla för att zooma</span></figure>';document.body.append(box);
-      const modalImage=box.querySelector('img');let scale=1,x=0,y=0,startX=0,startY=0,dragging=false;
-      const apply=()=>{modalImage.style.transform=`translate3d(${x}px,${y}px,0) scale(${scale})`};
+      const figure=box.querySelector('figure'),modalImage=box.querySelector('img');let scale=1,x=0,y=0,startX=0,startY=0,dragging=false;
+      const limits=()=>({x:Math.max(0,(modalImage.clientWidth*scale-figure.clientWidth)/2+24),y:Math.max(0,(modalImage.clientHeight*scale-figure.clientHeight)/2+24)});
+      const apply=()=>{const max=limits();x=clamp(x,-max.x,max.x);y=clamp(y,-max.y,max.y);modalImage.style.transform=`translate3d(${x}px,${y}px,0) scale(${scale})`};
       const reset=()=>{scale=1;x=0;y=0;apply()};
       const zoom=amount=>{scale=clamp(scale+amount,1,4);apply()};
-      modalImage.addEventListener('pointerdown',e=>{dragging=true;modalImage.setPointerCapture(e.pointerId);startX=e.clientX-x;startY=e.clientY-y});
-      modalImage.addEventListener('pointermove',e=>{if(dragging){x=e.clientX-startX;y=e.clientY-startY;apply()}});
-      ['pointerup','pointercancel'].forEach(type=>modalImage.addEventListener(type,e=>{dragging=false;try{modalImage.releasePointerCapture(e.pointerId)}catch{}}));
-      modalImage.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY<0?.22:-.22)},{passive:false});
-      modalImage.addEventListener('dblclick',()=>zoom(scale>1?-1:.8));
+      figure.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;dragging=true;figure.classList.add('is-dragging');figure.setPointerCapture(e.pointerId);startX=e.clientX-x;startY=e.clientY-y});
+      figure.addEventListener('pointermove',e=>{if(dragging){x=e.clientX-startX;y=e.clientY-startY;apply()}});
+      ['pointerup','pointercancel'].forEach(type=>figure.addEventListener(type,e=>{dragging=false;figure.classList.remove('is-dragging');try{figure.releasePointerCapture(e.pointerId)}catch{}}));
+      figure.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY<0?.22:-.22)},{passive:false});
+      figure.addEventListener('dblclick',()=>zoom(scale>1?-1:.8));
       box._reset=reset;
       box.addEventListener('click',e=>{if(e.target===box||e.target.closest('.product-lightbox-close'))closeLightbox()});box.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()})
     }
