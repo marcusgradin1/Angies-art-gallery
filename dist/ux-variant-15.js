@@ -40,6 +40,7 @@
       room.addEventListener('pointermove',e=>{if(!roomDragging)return;roomX=e.clientX-startX;roomY=e.clientY-startY;applyRoomZoom()});
       const stopRoomDrag=e=>{if(!roomDragging)return;roomDragging=false;try{room.releasePointerCapture(e.pointerId)}catch{}applyRoomZoom()};
       room.addEventListener('pointerup',stopRoomDrag);room.addEventListener('pointercancel',stopRoomDrag);applyRoomZoom();
+      frame.addEventListener('wheel',e=>{if(e.target.closest('button'))return;const next=Math.max(1,Math.min(2.2,roomZoom+(e.deltaY<0?.2:-.2)));if(next===roomZoom&&roomZoom===1)return;e.preventDefault();const rect=frame.getBoundingClientRect(),px=e.clientX-rect.left,py=e.clientY-rect.top,ratio=next/roomZoom;roomX=px-(px-roomX)*ratio;roomY=py-(py-roomY)*ratio;roomZoom=next;applyRoomZoom()},{passive:false});
       const sizeSelect=document.querySelector('.panel select[id^="size-"]');if(sizeSelect){sizeSelect.addEventListener('change',()=>syncRoom(sizeSelect.value))}syncRoom(sizeSelect?.value);
     }
   }

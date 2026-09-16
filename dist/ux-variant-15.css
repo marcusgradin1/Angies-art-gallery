@@ -16,6 +16,7 @@ body[data-variant="15"] .ux-room-preview__head p{margin:0;color:var(--muted);fon
 body[data-variant="15"] .ux-room{position:relative;overflow:hidden;aspect-ratio:16/10;background:var(--paper);touch-action:pan-y}
 body[data-variant="15"] .ux-room.is-zoomed{cursor:grab;touch-action:none}
 body[data-variant="15"] .ux-room.is-dragging{cursor:grabbing}
+body[data-variant="15"] .ux-room.is-zoomed .ux-room__scene{cursor:grab}
 body[data-variant="15"] .ux-room__scene{position:absolute;inset:0;transform-origin:center;transition:transform .25s ease}
 body[data-variant="15"] .ux-room__image{display:block;width:100%;height:100%;object-fit:cover}
 body[data-variant="15"] .ux-room__art{position:absolute;left:50%;top:37%;width:12.5%;aspect-ratio:1/1;object-fit:contain;transform:translate(-50%,-50%);box-shadow:0 1rem 2rem #29242622;transition:width .25s ease,aspect-ratio .25s ease}
