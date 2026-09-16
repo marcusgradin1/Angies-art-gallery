@@ -48,9 +48,9 @@
       box._reset=reset;
       box.addEventListener('click',e=>{if(e.target===box||e.target.closest('.product-lightbox-close'))closeLightbox()});box.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()})
     }
-    const modalImage=box.querySelector('img');box._reset();modalImage.src=src;modalImage.alt=alt;box.classList.add('open');box.setAttribute('aria-hidden','false');box.querySelector('.product-lightbox-close').focus();
+    const modalImage=box.querySelector('img');if(!box.classList.contains('open')){box._returnFocus=document.activeElement;box._previousBodyOverflow=document.body.style.overflow;document.body.style.overflow='hidden'}box._reset();modalImage.src=src;modalImage.alt=alt;box.classList.add('open');box.setAttribute('aria-hidden','false');box.querySelector('.product-lightbox-close').focus();
   }
-  function closeLightbox(){const box=document.querySelector('.product-lightbox');if(box){box.classList.remove('open');box.setAttribute('aria-hidden','true')}}
+  function closeLightbox(){const box=document.querySelector('.product-lightbox');if(box){box.classList.remove('open');box.setAttribute('aria-hidden','true');document.body.style.overflow=box._previousBodyOverflow||'';box._returnFocus?.focus?.();box._returnFocus=null}}
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
   document.addEventListener('click',e=>{const button=e.target.closest('button[data-view]');if(button)setTimeout(()=>{active?.reset();if(button.dataset.view==='close')active?.zoom(.35);if(button.dataset.view==='detail')active?.zoom(1.2)},0)});
   const observer=new MutationObserver(()=>setup());observer.observe(document.querySelector('#app')||document.body,{childList:true,subtree:true});
