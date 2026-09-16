@@ -8,7 +8,24 @@ body[data-variant="15"] .ux-discovery__link:hover,body[data-variant="15"] .ux-di
 body[data-variant="15"] .ux-discovery__link span{display:block;margin-top:.3rem;color:var(--muted);font-size:.7rem}
 body[data-variant="15"] .ux-discovery__link:hover span,body[data-variant="15"] .ux-discovery__link:focus-visible span{color:inherit;opacity:.72}
 body[data-variant="15"] .ux-view-status{display:flex;justify-content:space-between;align-items:center;margin:.35rem 0 0;color:var(--muted);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase}
+body[data-variant="15"] .ux-view-caption{margin:.65rem 0 0;color:var(--muted);font-size:.78rem;line-height:1.5}
+body[data-variant="15"] .ux-room-preview{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line)}
+body[data-variant="15"] .ux-room-preview__head{display:flex;justify-content:space-between;gap:1rem;align-items:end;margin-bottom:.8rem}
+body[data-variant="15"] .ux-room-preview__head strong{font:400 1.45rem/1 var(--serif)}
+body[data-variant="15"] .ux-room-preview__head p{margin:0;color:var(--muted);font-size:.72rem}
+body[data-variant="15"] .ux-room{position:relative;overflow:hidden;aspect-ratio:16/10;background:var(--paper)}
+body[data-variant="15"] .ux-room__image{display:block;width:100%;height:100%;object-fit:cover}
+body[data-variant="15"] .ux-room__art{position:absolute;left:50%;top:37%;width:18%;aspect-ratio:4/5;object-fit:cover;transform:translate(-50%,-50%);box-shadow:0 1rem 2rem #29242622;transition:width .25s ease}
+body[data-variant="15"] .ux-room__scale{display:flex;gap:.4rem;margin-top:.65rem}
+body[data-variant="15"] .ux-room__scale button,body[data-variant="15"] .ux-wishlist{border:1px solid var(--line);background:transparent;color:var(--fg);padding:.6rem .75rem;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+body[data-variant="15"] .ux-room__scale button:hover,body[data-variant="15"] .ux-room__scale button:focus-visible,body[data-variant="15"] .ux-room__scale button.is-active,body[data-variant="15"] .ux-wishlist:hover,body[data-variant="15"] .ux-wishlist:focus-visible,body[data-variant="15"] .ux-wishlist.is-saved{background:var(--fg);color:var(--bg)}
+body[data-variant="15"] .ux-wishlist{width:100%;margin-top:.65rem;text-align:center}
+body[data-variant="15"] .menu{display:grid;place-items:center;width:2.5rem;height:2.5rem;padding:0;font-size:0}
+body[data-variant="15"] .menu::before{content:'';width:1.1rem;height:1px;background:currentColor;box-shadow:0 -5px currentColor,0 5px currentColor}
+body[data-variant="15"] .nav.open{position:absolute;z-index:20;top:calc(100% + .65rem);right:clamp(1rem,5vw,6rem);display:grid;grid-template-columns:repeat(2,minmax(9rem,1fr));gap:.25rem;padding:.75rem;background:var(--bg);border:1px solid var(--line);box-shadow:0 1rem 2rem #29242618}
+body[data-variant="15"] .nav.open a{padding:.8rem;color:var(--fg);background:var(--paper)}
+body[data-variant="15"] .nav.open a:hover,body[data-variant="15"] .nav.open a:focus-visible{background:var(--fg);color:var(--bg)}
 body[data-variant="15"] .ux-toast{position:fixed;right:1.25rem;bottom:1.25rem;z-index:40;max-width:19rem;padding:.85rem 1rem;background:var(--fg);color:var(--bg);font-size:.74rem;box-shadow:0 1rem 2.5rem #29242622;opacity:0;transform:translateY(.5rem);pointer-events:none;transition:opacity .2s ease,transform .2s ease}
 body[data-variant="15"] .ux-toast.is-visible{opacity:1;transform:translateY(0)}
 body[data-variant="15"] .product-stage:focus-visible,body[data-variant="15"] .work:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-@media(max-width:760px){body[data-variant="15"] .ux-discovery{display:block;margin-bottom:1rem}body[data-variant="15"] .ux-discovery__links{margin-top:1px}body[data-variant="15"] .ux-toast{right:1rem;bottom:1rem;left:1rem;max-width:none}}
+@media(max-width:760px){body[data-variant="15"] .ux-discovery{display:block;margin-bottom:1rem}body[data-variant="15"] .ux-discovery__links{margin-top:1px}body[data-variant="15"] .ux-room-preview__head{display:block}body[data-variant="15"] .ux-room-preview__head p{margin-top:.4rem}body[data-variant="15"] .ux-toast{right:1rem;bottom:1rem;left:1rem;max-width:none}}
