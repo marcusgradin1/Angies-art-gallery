@@ -1,6 +1,6 @@
 .product-stage{cursor:grab;touch-action:none;user-select:none;isolation:isolate}
 .product-stage.is-dragging{cursor:grabbing}
-.product-stage img{will-change:transform;user-select:none;pointer-events:none}
+.product-stage img{will-change:transform;user-select:none;pointer-events:none;object-fit:contain;background:var(--paper)}
 .product-zoom-controls{position:absolute;z-index:3;top:1rem;right:1rem;display:flex;gap:.35rem}
 .product-zoom-controls button{width:2.2rem;height:2.2rem;border:1px solid var(--line);background:#fffdfae8;font-size:1.1rem;line-height:1}
 .product-zoom-controls button:hover,.product-zoom-controls button:focus-visible{background:var(--accent);border-color:var(--accent)}
