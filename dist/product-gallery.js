@@ -22,8 +22,9 @@
     const stop=e=>{if(!dragging)return;dragging=false;stage.classList.remove('is-dragging');try{stage.releasePointerCapture(e.pointerId)}catch{}};
     stage.addEventListener('pointerup',stop);stage.addEventListener('pointercancel',stop);
     stage.addEventListener('wheel',e=>{e.preventDefault();const box=stage.getBoundingClientRect();zoom(e.deltaY<0?.18:-.18,e.clientX-box.left,e.clientY-box.top)},{passive:false});
-    controls.addEventListener('click',e=>{const zoomButton=e.target.closest('[data-gallery-zoom]');if(zoomButton)zoom(zoomButton.dataset.galleryZoom==='in'?.2:-.2);if(e.target.closest('[data-gallery-reset]'))reset()});
-    stage.addEventListener('dblclick',()=>zoom(scale>1?-1:.7));
+    controls.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();const zoomButton=e.target.closest('[data-gallery-zoom]');if(zoomButton)zoom(zoomButton.dataset.galleryZoom==='in'?.2:-.2);if(e.target.closest('[data-gallery-reset]'))reset()});
+    controls.addEventListener('dblclick',e=>{e.preventDefault();e.stopPropagation()});
+    stage.addEventListener('dblclick',e=>{if(e.target.closest('button'))return;zoom(scale>1?-1:.7)});
     stage.addEventListener('click',e=>{if(e.target.closest('button')||dragging||moved){moved=false;return}openLightbox(image.src,image.alt)});
     stage.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!e.target.closest('button')){e.preventDefault();openLightbox(image.src,image.alt)}});
     active={reset,zoom,image};
