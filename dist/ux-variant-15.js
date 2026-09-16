@@ -1,6 +1,6 @@
 (function(){
   const params=new URLSearchParams(location.search);
-  if(params.get('variant')!=='15')return;
+  if(params.get('variant')&&params.get('variant')!=='15')return;
   document.body.dataset.variant='15';
   if(!document.querySelector('link[data-room-scale-css]')){const style=document.createElement('link');style.rel='stylesheet';style.href='ux-variant-15.css?rev=real-room-scale-1';style.dataset.roomScaleCss='true';document.head.append(style)}
   function addDiscovery(){
