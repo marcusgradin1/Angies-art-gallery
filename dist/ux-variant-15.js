@@ -2,7 +2,6 @@
   const params=new URLSearchParams(location.search);
   if(params.get('variant')!=='15')return;
   document.body.dataset.variant='15';
-  const productIds=['01','02','03','04','05'];
   function addDiscovery(){
     if(document.querySelector('.ux-discovery')||!document.querySelector('.hero'))return;
     const block=document.createElement('section');
@@ -18,19 +17,6 @@
     if(!document.querySelector('.ux-view-status')){
       const status=document.createElement('div');status.className='ux-view-status';status.innerHTML='<span>Bildvisning</span><span>Tre perspektiv · klicka för fullscreen</span>';
       stage.after(status);
-    }
-    if(!document.querySelector('.ux-product-nav')){
-      const id=(location.hash.match(/product-(\d+)/)||[])[1]||'01';
-      const index=Math.max(0,productIds.indexOf(id));
-      const previous=productIds[(index+productIds.length-1)%productIds.length];
-      const next=productIds[(index+1)%productIds.length];
-      const nav=document.createElement('nav');nav.className='ux-product-nav';nav.setAttribute('aria-label','Bläddra mellan verk');
-      nav.innerHTML=`<a href="#product-${previous}" data-route="product-${previous}">← Föregående verk</a><a href="#works" data-route="works">Alla verk</a><a href="#product-${next}" data-route="product-${next}">Nästa verk →</a>`;
-      document.querySelector('.product-gallery').append(nav);
-    }
-    if(!document.querySelector('.ux-trust-row')){
-      const trust=document.createElement('div');trust.className='ux-trust-row';trust.innerHTML='<div><strong>Tre tydliga vyer</strong><span>Se helhet, närbild och detalj.</span></div><div><strong>Omsorgsfullt tryck</strong><span>Material och format presenteras tydligt.</span></div><div><strong>Trygg beställning</strong><span>Frakt och retur samlas nära beslutet.</span></div>';
-      document.querySelector('.details')?.before(trust);
     }
   }
   function addToast(){
