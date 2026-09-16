@@ -111,7 +111,7 @@
   </style>
 </head>
 <body>
-  <header><a class="brand" href="#home" data-route="home">Angie's Art</a><nav class="nav"><a href="#works" data-route="works">Konstverk</a><a href="#collections" data-route="collections">Kollektioner</a><a class="orbit" href="#home" data-route="home" aria-label="Hem">AG</a><a href="#about" data-route="about">Om</a><a href="#prints" data-route="prints">Prints</a></nav><div class="right"><button id="searchBtn" aria-expanded="false">Sök</button><button id="cartBtn">Varukorg <span class="cartCount" id="cartCount">0</span></button><button class="mobileMenu" id="menuBtn" aria-label="Öppna meny">☰</button></div><div class="searchPanel" id="searchPanel"><label class="sr" for="searchInput">Sök efter konstverk</label><input id="searchInput" placeholder="Sök efter konstverk"><p id="searchResult">Sök bland verk 01 till 10</p></div></header>
+  <header><a class="brand" href="#home" data-route="home">Angie's Art</a><div class="headerMotif headerMotifLeft" aria-hidden="true"><img src="./header-hand-painting.png" alt="" loading="eager"></div><nav class="nav"><a href="#works" data-route="works">Konstverk</a><a href="#collections" data-route="collections">Kollektioner</a><a class="orbit" href="#home" data-route="home" aria-label="Hem">AG</a><a href="#about" data-route="about">Om</a><a href="#prints" data-route="prints">Prints</a></nav><div class="headerMotif headerMotifRight" aria-hidden="true"><img src="./header-hand-paint-can.png" alt="" loading="eager"></div><div class="right"><button id="searchBtn" aria-expanded="false">Sök</button><button id="cartBtn">Varukorg <span class="cartCount" id="cartCount">0</span></button><button class="mobileMenu" id="menuBtn" aria-label="Öppna meny">☰</button></div><div class="searchPanel" id="searchPanel"><label class="sr" for="searchInput">Sök efter konstverk</label><input id="searchInput" placeholder="Sök efter konstverk"><p id="searchResult">Sök bland verk 01 till 10</p></div></header>
   <main id="home" class="view active"><section class="hero"><div class="heroIntro"><span class="eyebrow">Konst för ditt rum</span><h1>Verk med plats för känsla.</h1><p>En varm och noggrant utvald värld av konstverk, prints och framtida kollektioner.</p><a class="button" href="#works" data-route="works">Se konstverken <span>↗</span></a></div><a class="heroArt" href="#product-01" data-route="product-01" aria-label="Visa konstverk 01"><div class="artFace"></div><span class="artNo">01</span></a><div class="heroSide"><a class="mini" href="#product-02" data-route="product-02">02</a><a class="mini" href="#product-03" data-route="product-03">03</a><a class="mini" href="#product-04" data-route="product-04">04</a></div></section><section class="section selectedWorks"><div class="sectionHead"><h2>Utvalda verk</h2><p>En handplockad förhandsvisning av konstbutiken. Klicka på ett verk för att se format, bildvisning och köpalternativ.</p></div><div class="grid" id="homeGrid"></div><div class="shopNote"><strong>Original och prints</strong><p>Varje verk får en egen sida med format, storlek och framtida köpalternativ.</p></div></section><section class="section statement"><div><span class="eyebrow">En samlad värld</span><h2>Konsten först.<br>Alltid.</h2></div><div><p>En professionell plats för verk som får ta plats, både på skärmen och hemma hos dig.</p><a class="button" href="#collections" data-route="collections">Utforska kollektioner</a></div></section></main>
   <main id="works" class="view"><section class="viewInner"><span class="eyebrow">Alla konstverk</span><h2>Konstverk</h2><p>Välj ett verk för att se en mer detaljerad presentation och framtida köpalternativ.</p><div class="grid" id="worksGrid"></div></section></main>
   <main id="collections" class="view"><section class="viewInner"><span class="eyebrow">Sammanhang</span><h2>Kollektioner</h2><p>Kollektioner samlar verk som hör ihop i färg, känsla eller berättelse.</p><div class="collectionCard"><span class="eyebrow">Kollektion 001</span><h3>Mjuka början</h3><p>En placeholder för en framtida sammanhållen serie.</p><div class="grid" id="collectionGrid"></div></div></section></main>
@@ -1083,6 +1083,24 @@
     }
     @media (forced-colors:active){
       .nav,.productInfo,.heroIntro,.shopIndex{border:1px solid CanvasText!important}
+    }
+
+    /* Structural header motifs: real grid columns, never pseudo-elements behind text. */
+    header{overflow:visible!important;grid-template-columns:minmax(150px,1fr) minmax(72px,110px) minmax(640px,760px) minmax(72px,110px) minmax(150px,1fr);gap:clamp(12px,1.7vw,28px)}
+    header:before,header:after{display:none!important;content:none!important}
+    .brand{grid-column:1;grid-row:1;justify-self:start}
+    .headerMotif{grid-row:1;align-self:center;justify-self:center;width:100%;height:clamp(70px,8vw,118px);display:grid;place-items:center;pointer-events:none;overflow:hidden;opacity:.2}
+    .headerMotif img{width:100%;height:100%;object-fit:contain;object-position:center;filter:saturate(.65)}
+    .headerMotifLeft{grid-column:2}.headerMotifRight{grid-column:4}
+    .nav{grid-column:3;grid-row:1}.right{grid-column:5;grid-row:1;justify-self:end}
+
+    @media (max-width:1279px) and (min-width:900px){
+      header{grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto;gap:18px;padding:10px var(--page-gutter)}
+      .brand{grid-column:1;grid-row:1}.right{grid-column:2;grid-row:1}
+      .headerMotif{display:none}.nav{grid-column:auto;grid-row:auto}
+    }
+    @media (max-width:899px){
+      .headerMotif{display:none}.brand{grid-column:1;grid-row:1}.right{grid-column:2;grid-row:1}.nav{grid-column:auto;grid-row:auto}
     }
   </style>
   <script id="responsive-v02-behaviour">
