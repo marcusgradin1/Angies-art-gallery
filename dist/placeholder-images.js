@@ -3,6 +3,7 @@
   const sourceFor=id=>images[(Math.max(1,Number(id)||1)-1)%images.length];
   const productId=()=>{const match=location.hash.match(/^#product-(\d+)/);return match?Number(match[1]):null};
   function refresh(){
+    const search=document.querySelector('#search');if(search){search.classList.remove('open');const toggle=document.querySelector('#searchToggle');if(toggle)toggle.setAttribute('aria-expanded','false');}
     const id=productId();
     document.querySelectorAll('.work-image,.art-image,.large-image').forEach((img,index)=>{const match=img.closest('a')?.getAttribute('href')?.match(/product-(\d+)/);img.src=sourceFor(match?match[1]:(id||index+1));});
     if(id){
