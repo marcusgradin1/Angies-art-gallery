@@ -13,7 +13,7 @@
     'Hitta ett verk som passar rummet.':'Hitta rätt verk.',
     'Utforska efter uttryck, kollektion eller format och låt bilden leda dig vidare.':'Utforska efter känsla.',
     'En första blick på ett nytt visuellt landskap.':'En första blick.',
-    'Kuraterade världar':'Efter känsla',
+    'Kuraterade världar':'Kuraterat urval',
     'Format och material':'Material och format',
     'Processen bakom':'Bakom verken',
     'Galleri / utställningsvy':'Galleri',
