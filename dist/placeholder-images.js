@@ -4,7 +4,7 @@
   const productId=()=>{const match=location.hash.match(/^#product-(\d+)/);return match?Number(match[1]):null};
   function refresh(){
     const id=productId();
-    document.querySelectorAll('.work-image,.art-image').forEach((img,index)=>{const match=img.closest('a')?.getAttribute('href')?.match(/product-(\d+)/);img.src=sourceFor(match?match[1]:(index+1));});
+    document.querySelectorAll('.work-image,.art-image,.large-image').forEach((img,index)=>{const match=img.closest('a')?.getAttribute('href')?.match(/product-(\d+)/);img.src=sourceFor(match?match[1]:(id||index+1));});
     if(id){
       const src=sourceFor(id);
       document.querySelectorAll('[data-product-image],.product-view img').forEach(img=>{img.src=src;img.dataset.image=src;});
