@@ -1,6 +1,6 @@
 (function(){
   if(typeof products!=='undefined'&&Array.isArray(products))products.splice(9);
-  const cleanup=document.createElement('style');cleanup.textContent='.visual:before,.art:before,.art:after{display:none!important}.art{box-shadow:none!important}';document.head.append(cleanup);
+  const cleanup=document.createElement('style');cleanup.textContent=".visual:before{content:'AG'!important;display:block!important;position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);font:400 clamp(16rem,42vw,34rem)/.7 var(--serif);letter-spacing:-.16em;color:#29242616;z-index:0;pointer-events:none}.art:before,.art:after{display:none!important}.art{width:min(84%,32rem)!important;box-shadow:none!important;z-index:1}";document.head.append(cleanup);
   const copy={
     'Samtida konst / digital utställning':'Samtida konst',
     'Angie\'s Art Gallery samlar verk med egen rytm, yta och närvaro.':'Konst med egen rytm och närvaro.',
